@@ -458,7 +458,7 @@ ploty = np.linspace(0, binary_warped.shape[0]-1, binary_warped.shape[0] )
 left_fitx = left_fit[0]*ploty**2 + left_fit[1]*ploty + left_fit[2]
 right_fitx = right_fit[0]*ploty**2 + right_fit[1]*ploty + right_fit[2]
 
-And you're done! But let's visualize the result here as well
+# And you're done! But let's visualize the result here as well
 
 # Create an image to draw on and an image to show the selection window
 out_img = np.dstack((binary_warped, binary_warped, binary_warped))*255
