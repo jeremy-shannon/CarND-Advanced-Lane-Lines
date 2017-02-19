@@ -1,3 +1,5 @@
+############################### FIND CHESSBOARD CORNERS ###############################
+
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
@@ -23,7 +25,7 @@ if ret == True:
     cv2.drawChessboardCorners(img, (nx, ny), corners, ret)
     plt.imshow(img)
 
-##############################
+############################## CAMERA CALIBRATION UNDISTORT ###############################
 
 import pickle
 import cv2
@@ -59,7 +61,7 @@ ax2.imshow(undistorted)
 ax2.set_title('Undistorted Image', fontsize=50)
 plt.subplots_adjust(left=0., right=1, top=0.9, bottom=0.)
 
-###################################
+################################### PERSPECTIVE TRANSFORM ###############################
 
 import pickle
 import cv2
@@ -121,7 +123,7 @@ ax2.imshow(top_down)
 ax2.set_title('Undistorted and Warped Image', fontsize=50)
 plt.subplots_adjust(left=0., right=1, top=0.9, bottom=0.)
 
-################################
+################################ SOBEL GRADIENT ABSOLUTE (X,Y) THRESHOLD ###############################
 
 import numpy as np
 import cv2
@@ -166,7 +168,7 @@ ax2.imshow(grad_binary, cmap='gray')
 ax2.set_title('Thresholded Gradient', fontsize=50)
 plt.subplots_adjust(left=0., right=1, top=0.9, bottom=0.)
 
-##################################
+################################## SOBEL GRADIENT MAGNITUDE THRESHOLD ###############################
 
 import numpy as np
 import cv2
@@ -211,7 +213,7 @@ ax2.imshow(mag_binary, cmap='gray')
 ax2.set_title('Thresholded Magnitude', fontsize=50)
 plt.subplots_adjust(left=0., right=1, top=0.9, bottom=0.)
 
-######################################
+###################################### SOBEL GRADIENT DIRECTION THRESHOLD ###############################
 
 import numpy as np
 import cv2
@@ -258,7 +260,7 @@ ax2.imshow(dir_binary, cmap='gray')
 ax2.set_title('Thresholded Grad. Dir.', fontsize=50)
 plt.subplots_adjust(left=0., right=1, top=0.9, bottom=0.)
 
-#####################################
+##################################### HLS S-CHANNEL THRESHOLD ###############################
 
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
@@ -291,7 +293,7 @@ ax2.imshow(hls_binary, cmap='gray')
 ax2.set_title('Thresholded S', fontsize=50)
 plt.subplots_adjust(left=0., right=1, top=0.9, bottom=0.)
 
-####################################
+#################################### DEFINE AN IMAGE PROCESSING PIPELINE ###############################
 
 import numpy as np
 import cv2
@@ -339,7 +341,7 @@ ax2.imshow(result)
 ax2.set_title('Pipeline Result', fontsize=40)
 plt.subplots_adjust(left=0., right=1, top=0.9, bottom=0.)
 
-#####################################
+##################################### FINDING LINES WITH SLIDING WINDOW ###############################
 
 # Implement Sliding Windows and Fit a Polynomial
 
@@ -430,10 +432,14 @@ plt.plot(right_fitx, ploty, color='yellow')
 plt.xlim(0, 1280)
 plt.ylim(720, 0)
 
-And the output should look something like this:
-Skip the sliding windows step once you know where the lines are
+# And the output should look something like this:
 
-Now you know where the lines are you have a fit! In the next frame of video you don't need to do a blind search again, but instead you can just search in a margin around the previous line position like this:
+################################### FINDING LINES USING PREVIOUS POLYFIT ###############################
+
+# Skip the sliding windows step once you know where the lines are
+
+# Now you know where the lines are you have a fit! In the next frame of video you don't need to do a blind search again,
+# but instead you can just search in a margin around the previous line position like this:
 
 # Assume you now have a new warped binary image 
 # from the next frame of video (also called "binary_warped")
@@ -486,7 +492,7 @@ plt.plot(right_fitx, ploty, color='yellow')
 plt.xlim(0, 1280)
 plt.ylim(720, 0)
 
-###############################
+###############################   SLIDING WINDOW USING CONVOLUTION ###############################
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -577,7 +583,7 @@ plt.imshow(output)
 plt.title('window fitting results')
 plt.show()
 
-################################
+################################ DETERMINE RADIUS OF CURVATURE ###############################
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -611,9 +617,6 @@ plt.plot(left_fitx, ploty, color='green', linewidth=3)
 plt.plot(right_fitx, ploty, color='green', linewidth=3)
 plt.gca().invert_yaxis() # to visualize as we do the images
 
-###################################
-
-
 # Define y-value where we want radius of curvature
 # I'll choose the maximum y-value, corresponding to the bottom of the image
 y_eval = np.max(ploty)
@@ -621,8 +624,6 @@ left_curverad = ((1 + (2*left_fit[0]*y_eval + left_fit[1])**2)**1.5) / np.absolu
 right_curverad = ((1 + (2*right_fit[0]*y_eval + right_fit[1])**2)**1.5) / np.absolute(2*right_fit[0])
 print(left_curverad, right_curverad)
 # Example values: 1926.74 1908.48
-
-######################################
 
 # Define conversions in x and y from pixels space to meters
 ym_per_pix = 30/720 # meters per pixel in y dimension
@@ -638,7 +639,7 @@ right_curverad = ((1 + (2*right_fit_cr[0]*y_eval*ym_per_pix + right_fit_cr[1])**
 print(left_curverad, 'm', right_curverad, 'm')
 # Example values: 632.1 m    626.2 m
 
-######################################
+###################################### DEFINE A CLASS TO HOLD DATA FOR LINES ###############################
 
 # Define a class to receive the characteristics of each line detection
 class Line():
