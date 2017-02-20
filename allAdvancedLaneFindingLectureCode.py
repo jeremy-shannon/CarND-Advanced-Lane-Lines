@@ -666,7 +666,7 @@ class Line():
         self.ally = None
 
 		
-###########################################
+########################################### DRAW LANE ONTO ORIGINAL IMAGE ###########################################
 
 # Create an image to draw the lines on
 warp_zero = np.zeros_like(warped).astype(np.uint8)
